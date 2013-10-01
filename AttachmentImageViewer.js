@@ -1,17 +1,40 @@
+/*
+Attachment Image Viewer
+Rob Bittner
+Setember 22, 2011
+
+Version History
+.1 & 1.0 : Initial Release
+1.1 : Added preview and new window popup
+*/
 SPICEWORKS.app.helpdesk.ticket.ready(function(){
+  
+
   var ticketSummary = document.getElementById("item_summary_content");
   var anchors = ticketSummary.getElementsByTagName("a");
   var attachmentRegExp = /\/tickets\/attachment/i;
   var imageRegExp = /\.(png|jpg|jpeg|gif|bmp|tif|tiff)/i;
-  for(i =0; i<anchors.length; i++) {
+  var imageDelegate= function(image) {
+    var imageWindow = window.open();
+    imageWindow.document.write('<img src="' + image.src + '">');
+  }
+
+  for(i=0; i<anchors.length; i++) {
     var anchor = anchors[i];
+    console.log(anchor.href);
     if (attachmentRegExp.test(anchor.href) && 
-        imageRegExp.test(anchor.innerText)  ) {
+        imageRegExp.test(anchor.innerHTML)  ) {
+          
       var li = anchor.parentNode.parentNode.parentNode;
       li.appendChild(document.createElement("br"));
       var img = document.createElement("img");
+      img.style.width="50px";
+      img.style.height="50px";
+      img.style.cursor="pointer";
+      img.title="Click for full version";
       img.src=anchor.href;
+      img.onclick=function(){ imageDelegate(this); };
       li.appendChild(img);
     }
   }
-});?
+});??
