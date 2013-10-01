@@ -7,6 +7,9 @@ Version History
 .1 & 1.0 : Initial Release
 1.1 : Added preview and new window popup for full image
 1.11 : Fixed the full window creation
+1.2 : Added support for ico.  It was uber-difficult.  
+      I had to /actually/ type the following "ico|"!!
+      yowza, I'm not paid enough.. (:
 */
 SPICEWORKS.app.helpdesk.ticket.ready(function(){
   
@@ -14,7 +17,7 @@ SPICEWORKS.app.helpdesk.ticket.ready(function(){
   var ticketSummary = document.getElementById("item_summary_content");
   var anchors = ticketSummary.getElementsByTagName("a");
   var attachmentRegExp = /\/tickets\/attachment/i;
-  var imageRegExp = /\.(png|jpg|jpeg|gif|bmp|tif|tiff)/i;
+  var imageRegExp = /\.(bmp|gif|ico|jpg|jpeg|png|tif|tiff)/i;
   var imageDelegate= function(image) {
     var imageWindow = window.open("");
     imageWindow.document.write('<html><head><title>Ticket Attachment</title></head><body><img src="' + image.src + '"></body></html>');
@@ -39,4 +42,4 @@ SPICEWORKS.app.helpdesk.ticket.ready(function(){
       li.appendChild(img);
     }
   }
-});??
+});?
